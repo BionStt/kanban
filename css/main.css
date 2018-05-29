@@ -37,7 +37,7 @@ body {
     height: 50px;
     font-size: 16px;
     border: none;
-    width: Calc(100% - 100px);
+    width: Calc(100% - 50px);
 }
 
 .container .kanban-board {
@@ -216,10 +216,6 @@ body {
     opacity: 1;
 }
 
-#settings {
-    width: 50px
-}
-
 #dark {
     width: 50px
 }
@@ -231,7 +227,7 @@ body {
     padding: 0.75rem 1rem;
     border: 0;
     /* border-radius: 0.317rem; */
-    /* background-color: #aaa; */
+    background-color: white;
     color: black;
     text-decoration: none;
     font-weight: 700;
@@ -249,8 +245,8 @@ body {
 }
 
 .button-save-dark {
-    background-color:white;
-    color:  #292c2f;
+    background-color: white;
+    color: #292c2f;
 }
 
 .button-dark {
