@@ -76,6 +76,13 @@ function load() {
         arr = JSON.parse(localStorage.getItem("data"));
 
         if (arr != null) {
+
+            arr = {
+                todo: [],
+                doing: [],
+                done: []
+            }
+
             write(arr.todo, todoList);
             write(arr.doing, doingList);
             write(arr.done, doneList);
