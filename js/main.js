@@ -10,6 +10,9 @@ let doingList = document.getElementById('doingUl');
 let doneList = document.getElementById('doneUl');
 let input = document.getElementById("input");
 
+let secret = "";
+let bin = "";
+
 /// Drag and drop
 function allowDrop(ev) {
     ev.preventDefault();
@@ -33,6 +36,7 @@ input.addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13)
         add();
+
     write();
     save();
 });
@@ -48,6 +52,8 @@ function add() {
         category: 'todo',
         id: Math.random().toString(36).substring(7)
     }
+
+    input.value = "";
 
     arr.todo.push(obj);
     write(arr.todo, todoList)
@@ -67,7 +73,7 @@ function write(category, list) {
 /// get card element
 function getCard(obj) {
     let li = document.createElement('li');
-    li.innerHTML = '' + obj.text + '<span class="btn-delete" onclick="remove(' + obj.id + ')"></span>';
+    li.innerHTML = obj.text + "<span class='btn-delete' removeid='" + obj.id + "' onclick='remove(event)'><i class='fas fa-times'></i></span>";
     li.setAttribute("draggable", true);
     li.setAttribute("ondragstart", "drag(event)");
     li.id = obj.id;
@@ -82,22 +88,23 @@ function clear(element) {
     }
 }
 
+/// get lis and set counters
 function setCounter() {
     document.getElementById('todoCounter').innerHTML = document.getElementById('todoUl').children.length;
     document.getElementById('doingCounter').innerHTML = document.getElementById('doingUl').children.length;
     document.getElementById('doneCounter').innerHTML = document.getElementById('doneUl').children.length;
 }
 
-load();
+
 
 /// load
 function load() {
 
     $.ajax({
-        url: 'https://api.jsonbin.io/b/5b0bf68fc83f6d4cc734a080/latest',
+        url: 'https://api.jsonbin.io/b/' + bin + '/latest',
         type: 'GET',
         headers: { //Required only if you are trying to access a private bin
-            'secret-key': '$2a$10$V36.po9G/JTdYKf4OeuUiODyGHTrWZW4SlXb1lyHOF5KqIcCdCwEi'
+            'secret-key': secret
         },
         success: (data) => {
             arr.todo = data.todo;
@@ -116,9 +123,9 @@ function load() {
     });
 }
 
-function remove(id) {
-
-    $("#" + id).remove()
+function remove(e) {
+    let parentElement = document.getElementById(e.srcElement.getAttribute("removeid"));
+    $("#" + parentElement.id).remove()
     save();
 }
 
@@ -149,6 +156,7 @@ function save() {
         }
         newDoingList.push(obj);
     });
+
     currentDoneList.forEach(element => {
         let obj = {
             text: element.innerText,
@@ -163,8 +171,11 @@ function save() {
     arr.done = newDoneList;
 
     $.ajax({
-        url: 'https://api.jsonbin.io/b/5b0bf68fc83f6d4cc734a080',
+        url: 'https://api.jsonbin.io/b/' + bin,
         type: 'PUT',
+        headers: { //Required only if you are trying to access a private bin
+            'secret-key': secret
+        },
         contentType: 'application/json',
         data: JSON.stringify(arr),
         success: (data) => {
@@ -174,9 +185,93 @@ function save() {
             console.log(err.responseJSON);
         }
     });
-    // console.log(newTodoList);
-    // console.log(newDoingList);
-    // console.log(newDoneList);
 }
 
-// //api.jsonbin.io/b/5b0bf68fc83f6d4cc734a080
+function getLocalstorage() {
+    var info = JSON.parse(localStorage.getItem("info"));
+
+    if (info == null) {
+        input.setAttribute("disabled", true);
+        input.value = "Set your settings first!"
+        return false;
+    }
+
+    if (info.secret == null || info.secret == "" || info.bin == null || info.bin == "") {
+        input.setAttribute("disabled", true);
+        input.value = "Settings are wrong!"
+
+        return false;
+    }
+
+    secret = info.secret;
+    bin = info.bin;
+    var dark = JSON.parse(localStorage.getItem("dark"));
+
+    if (dark == null) {
+        dark = false;
+    }
+
+    if (dark) {
+        document.getElementById("container").className = "container dark";
+        document.getElementById("settings").className = "button btn-round button-dark";
+        document.getElementById("dark").className = "button btn-round button-dark";
+        document.getElementById("savebtn").className = "button btn-round button-save-dark";
+        document.getElementById("modal").className = "modal modal-dark";
+    }
+
+    document.getElementById("secret").value = secret;
+    document.getElementById("bin").value = bin;
+    document.getElementById("dark").checked = dark;
+
+    return true;
+
+}
+
+function darkmode() {
+
+    var dark = false
+    if (document.getElementById("container").className == "container") {
+        dark = true
+    }
+
+    if (dark) {
+        document.getElementById("container").className = "container dark";
+        document.getElementById("settings").className = "button btn-round button-dark";
+        document.getElementById("dark").className = "button btn-round button-dark";
+        document.getElementById("savebtn").className = "button btn-round button-save-dark";
+        document.getElementById("modal").className = "modal modal-dark";
+    } else {
+
+        document.getElementById("container").className = "container";
+        document.getElementById("settings").className = "button btn-round ";
+        document.getElementById("dark").className = "button btn-round ";
+        document.getElementById("savebtn").className = "button btn-round button-save-dark";
+        document.getElementById("modal").className = "modal ";
+    }
+
+    localStorage.setItem("dark", JSON.stringify(dark));
+
+}
+
+function saveData() {
+
+    var secret = document.getElementById("secret").value;
+    var bin = document.getElementById("bin").value;
+
+    var obj = {
+        secret: secret,
+        bin: bin
+    }
+
+    localStorage.setItem("info", JSON.stringify(obj));
+    window.location.reload(false);
+}
+
+$(function () {
+
+    if (getLocalstorage()) {
+        load();
+
+    }
+
+});

@@ -8,11 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+
+
 </head>
 
 <body>
-    <div class="container">
-        <input id="input" type="text" class="task-input">
+    <div class="container" id="container">
+        <div class="top">
+            <input id="input" type="text" class="task-input">
+
+            <a href="#modal1" class="button btn-round" id="settings">
+                <span>
+                    <i class="fas fa-wrench"></i>
+                </span>
+            </a>
+            <a onclick="darkmode()" class="button btn-round" id="dark">
+                    <span>
+                            <i class="far fa-lightbulb"></i>
+                    </span>
+                </a>
+        </div>
+
         <div class="kanban-board">
             <div class="category todo" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h2>Todo</h2>
@@ -39,8 +55,37 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    <div id="modal1" class="overlay">
+            <a class="cancel" href="#"></a>
+            <div id="modal" class="modal">
+                <h2>Settings</h2>
+                <div class="content">
+                    <p style="color: #AAA;">Check the setup guide right
+                        <a href="https://github.com/emimontesdeoca/kanban">here</a>.</p>
+                    <p>
+                        <label for="secret">JSONbin secret</label>
+                        <br>
+                        <input class="task-input" id="secret" type="text">
+                    </p>
+                    <p>
+                        <label for="bin">JSONbin bin</label>
+                        <br>
+                        <input class="task-input" id="bin" type="text">
+                    </p>
+                    <p>
+                        <label for="dark">Dark mode</label>
+                        <input type="checkbox" id="dark">
+                    </p>
+    
+                    <p>
+                        <a href="#!" class="button button-save" id="savebtn" onclick="saveData()"><i class="fas fa-save"></i></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
     <script src="js/main.js"></script>
 </body>
 
