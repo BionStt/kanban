@@ -75,9 +75,11 @@ function load() {
     if (!jsonbin) {
         arr = JSON.parse(localStorage.getItem("data"));
 
-        write(arr.todo, todoList);
-        write(arr.doing, doingList);
-        write(arr.done, doneList);
+        if (arr != null) {
+            write(arr.todo, todoList);
+            write(arr.doing, doingList);
+            write(arr.done, doneList);
+        }
 
 
     } else {
