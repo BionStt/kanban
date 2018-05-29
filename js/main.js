@@ -76,21 +76,17 @@ function load() {
         arr = JSON.parse(localStorage.getItem("data"));
 
         if (arr != null) {
-
+            write(arr.todo, todoList);
+            write(arr.doing, doingList);
+            write(arr.done, doneList);
+        } else {
             arr = {
                 todo: [],
                 doing: [],
                 done: []
             }
-
-            write(arr.todo, todoList);
-            write(arr.doing, doingList);
-            write(arr.done, doneList);
         }
-
-
     } else {
-
         $.ajax({
             url: 'https://api.jsonbin.io/b/' + bin + '/latest',
             type: 'GET',
@@ -108,7 +104,6 @@ function load() {
                 console.log(err.responseJSON);
             }
         });
-
     }
 }
 
