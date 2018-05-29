@@ -111,9 +111,9 @@ function save() {
     let newDoingList = getTicketsByCategory("doing", "#doingUl > li");
     let newDoneList = getTicketsByCategory("done", "#doneUl > li");
 
-    arr.todo = newTodoList;
-    arr.doing = newDoingList;
-    arr.done = newDoneList;
+    arr.todo = newTodoList || [];
+    arr.doing = newDoingList || [];
+    arr.done = newDoneList || [];
 
     if (!jsonbin) {
 
