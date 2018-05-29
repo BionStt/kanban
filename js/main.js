@@ -200,4 +200,5 @@ $(function () {
 
     getLocalstorage();
     load();
+    setCounter();
 });

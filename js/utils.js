@@ -60,6 +60,7 @@ function remove(e) {
     let parentElement = document.getElementById(e.srcElement.getAttribute("removeid"));
     $("#" + parentElement.id).remove()
     save();
+    setCounter();
 }
 
 /// Get random id
