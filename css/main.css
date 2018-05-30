@@ -12,6 +12,11 @@ body {
 *::before {
     box-sizing: inherit;
     font-family: "PT Sans", sans-serif;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 [draggable] {
@@ -93,14 +98,12 @@ body {
     top: 50%;
     right: 10px;
     margin-top: -11px;
-    opacity: 0.05;
+    opacity: 0.30;
     cursor: pointer;
-    transition: 0.5s opacity;
+    transition: 0.7s opacity;
     font-size: 15px;
     text-align: center;
     line-height: 24px;
-    /* text-indent: -3px;
-    transform: rotateZ(45deg); */
 }
 
 .container .kanban-board .category ul li .btn-delete:hover {
@@ -123,11 +126,6 @@ body {
     background: #1d1f21;
 }
 
-.modal-dark {
-    background: #1d1f21 !important;
-    color: #FAFAFA !important;
-}
-
 .container.dark .task-input {
     background: #292c2f;
     color: #FAFAFA;
@@ -142,82 +140,25 @@ body {
     color: #e8e8e8;
 }
 
-.modal {
-    margin: 30px auto;
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #666;
-    width: 300px;
-    border-radius: 0px;
-    /* box-shadow: 0 0 50px rgba(0, 0, 0, 0.5); */
-    position: relative;
-}
-
-.modal h2 {
-    margin-top: 0;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.modal .close {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    top: 20px;
-    right: 20px;
-    opacity: 0.8;
-    transition: all 200ms;
-    font-size: 24px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #777;
-}
-
-.modal .close:hover {
-    opacity: 1;
-}
-
-.modal .content {
-    max-height: 400px;
-    overflow: auto;
-}
-
-.modal p {
-    margin: 0 0 1em;
-    text-align: center;
-}
-
-.modal p:last-child {
-    margin: 0;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.5);
-    transition: opacity 200ms;
-    visibility: hidden;
-    opacity: 0;
-    overflow: hidden;
-}
-
-.overlay .cancel {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    cursor: default;
-}
-
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-}
-
 #dark {
     width: 50px
+}
+
+#dark span i {
+    transition: none;
+}
+
+#dark span {
+    transition: none;
+}
+
+#dark span svg path{
+    transition: none;
+}
+
+svg:not(:root).svg-inline--fa{
+    transition: none;
+    
 }
 
 .button {
@@ -233,43 +174,14 @@ body {
     font-weight: 700;
     font-size: 1rem;
     line-height: 1.5;
-    font-family: "Helvetica Neue", Arial, sans-serif;
     cursor: pointer;
     -webkit-appearance: none;
     -webkit-font-smoothing: antialiased;
 }
 
-.button-save {
-    background-color: #292c2f;
-    color: white;
-}
-
-.button-save-dark {
-    background-color: white;
-    color: #292c2f;
-}
-
 .button-dark {
     background-color: #292c2f;
     color: white;
-}
-
-.button:hover {
-    opacity: 0.85;
-}
-
-.button:active {
-    box-shadow: inset 0 3px 4px hsla(0, 0%, 0%, 0.2);
-}
-
-.button:focus {
-    outline: thin dotted #444;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-}
-
-.button_primary {
-    background-color: #1fa3ec;
 }
 
 .top {

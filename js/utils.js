@@ -16,7 +16,7 @@ function drop(ev) {
     save();
 }
 
-/// get lis and set counters
+/// get list and set counters
 function setCounter() {
     document.getElementById('todoCounter').innerHTML = document.getElementById('todoUl').children.length;
     document.getElementById('doingCounter').innerHTML = document.getElementById('doingUl').children.length;
@@ -31,7 +31,6 @@ function clear(element) {
             myNode.removeChild(myNode.firstChild);
         }
     } catch (error) {}
-
 }
 
 /// get card element
@@ -68,6 +67,7 @@ function getRandomId() {
     return Math.random().toString(36).substring(7);
 }
 
+/// gets all the tickets in object form by the category type and jquerypath
 function getTicketsByCategory(categoryName, jqueryPath) {
     let returnList = [];
     let curentList = document.querySelectorAll(jqueryPath);
@@ -84,17 +84,20 @@ function getTicketsByCategory(categoryName, jqueryPath) {
     return returnList;
 }
 
+/// returns random id
 function getRandomArray(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+/// toggles dark mode
 function setDark(dark) {
     if (dark) {
+        document.getElementById("dark").className = "button button-dark";
+        
         document.getElementById("container").className = "container dark";
-        document.getElementById("dark").className = "button btn-round button-dark";
     } else {
-
+        document.getElementById("dark").className = "button";
+        
         document.getElementById("container").className = "container";
-        document.getElementById("dark").className = "button btn-round ";
     }
 }

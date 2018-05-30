@@ -49,7 +49,6 @@ input.addEventListener("keyup", function (event) {
 
 /// Add card to todo
 function add() {
-
     input = document.getElementById("input");
 
     if (input.value == "") {
@@ -197,11 +196,9 @@ function saveData(key, value) {
     window.location.reload(false);
 }
 
+getLocalstorage();
+
 $(function () {
-
-
-
-    getLocalstorage();
     load();
     setCounter();
 });
