@@ -33,7 +33,7 @@ body {
 
 .container {
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     display: flex;
     flex-direction: column;
     background: #F6F6F6;
@@ -228,6 +228,25 @@ svg:not(:root).svg-inline--fa {
     }
 }
 
-.container.dark .kanban-board .category ul li:nth-child(1), .container .kanban-board .category ul li:nth-child(1){
+.container.dark .kanban-board .category ul li:nth-child(1),
+.container .kanban-board .category ul li:nth-child(1) {
     margin-left: px !important;
+}
+
+@media (max-width: 768px) {
+    .container #kanban-board {
+        flex-direction: column;
+    }
+    #todoUl,
+    #doingUl,
+    #doneUl {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #todoUl li,
+    #doingUl li,
+    #doneUl li {
+        flex-basis: 100%;
+        margin-left: 0 !important;
+    }
 }
