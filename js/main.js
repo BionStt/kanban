@@ -42,7 +42,6 @@ input.addEventListener("keyup", function (event) {
             window.location.reload();
         }
 
-
         add();
         save();
     }
@@ -70,16 +69,15 @@ function add() {
 
 /// load
 function load() {
-
     $('#input').attr('placeholder', getRandomArray(phrases) + "...");
 
     if (!jsonbin) {
         arr = JSON.parse(localStorage.getItem("data"));
 
         if (arr != null) {
-            write(arr.todo, todoList, true,false);
-            write(arr.doing, doingList, true,false);
-            write(arr.done, doneList, true,false);
+            write(arr.todo, todoList, true, false);
+            write(arr.doing, doingList, true, false);
+            write(arr.done, doneList, true, false);
         } else {
             arr = {
                 todo: [],
@@ -95,9 +93,9 @@ function load() {
                 'secret-key': secret
             },
             success: (data) => {
-                write(data.todo, todoList, true,false);
-                write(data.doing, doingList, true,false);
-                write(data.done, doneList, true,false);
+                write(data.todo, todoList, true, false);
+                write(data.doing, doingList, true, false);
+                write(data.done, doneList, true, false);
 
                 setCounter();
             },
@@ -113,7 +111,6 @@ function load() {
 }
 
 function save() {
-
     let newTodoList = getTicketsByCategory("todo", "#todoUl > li");
     let newDoingList = getTicketsByCategory("doing", "#doingUl > li");
     let newDoneList = getTicketsByCategory("done", "#doneUl > li");
@@ -123,13 +120,8 @@ function save() {
     arr.done = newDoneList || [];
 
     if (!jsonbin) {
-
         localStorage.setItem("data", JSON.stringify(arr));
-
-
     } else {
-
-
         $.ajax({
             url: 'https://api.jsonbin.io/b/' + bin,
             type: 'PUT',
@@ -151,7 +143,6 @@ function save() {
 }
 
 function getLocalstorage() {
-
     var dark = JSON.parse(localStorage.getItem("dark"));
 
     if (dark == null) {
@@ -169,13 +160,11 @@ function getLocalstorage() {
     }
 
     jsonbin = true;
-
     secret = secretStored;
     bin = binStored;
 
 
     return true;
-
 }
 
 function darkmode() {

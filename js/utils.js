@@ -59,13 +59,11 @@ function write(category, list, fadein, isfirst) {
         counter++;
     });
 
-
     setCounter();
 }
 
 /// write todo card 
 function writeone(category, list, obj) {
-
     let li = getCard(obj);
     li.focus();
     li.className += "fade-in";
