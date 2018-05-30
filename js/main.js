@@ -205,8 +205,6 @@ function saveData(key, value) {
 getLocalstorage();
 
 $(function () {
-    $("body").addClass("filterblur");
-
     load();
 
     setCounter();
@@ -216,7 +214,6 @@ $(function () {
     if (chart == null) {
         chart = false;
     }
-    toggleChart(chart);
-    $("body").removeClass("filterblur");
 
+    toggleChart(chart);
 });
