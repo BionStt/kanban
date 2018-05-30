@@ -65,6 +65,14 @@ function add() {
 
     arr.todo.push(obj);
     writeone(arr.todo, todoList, obj)
+
+    var chart = JSON.parse(localStorage.getItem("chart"));
+
+    if (chart == null) {
+        chart = false;
+    }
+
+    toggleChart(chart);
 }
 
 /// load
@@ -179,6 +187,14 @@ function darkmode() {
     localStorage.setItem("dark", JSON.stringify(dark));
 }
 
+function chartmode() {
+    var kanbanchart = document.getElementById("kanban-board").getAttribute("chart") == "true" ? true : false;
+
+    toggleChart(!kanbanchart);
+
+    localStorage.setItem("chart", JSON.stringify(!kanbanchart));
+}
+
 function saveData(key, value) {
     var localstorage = JSON.parse(localStorage.getItem(key));
     localStorage.setItem(key, JSON.stringify(value));
@@ -189,6 +205,18 @@ function saveData(key, value) {
 getLocalstorage();
 
 $(function () {
+    $("body").addClass("filterblur");
+
     load();
+
     setCounter();
+
+    var chart = JSON.parse(localStorage.getItem("chart"));
+
+    if (chart == null) {
+        chart = false;
+    }
+    toggleChart(chart);
+    $("body").removeClass("filterblur");
+
 });

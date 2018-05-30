@@ -11,16 +11,16 @@
     <link rel="icon" type="image/png" href="ico.png" />
 </head>
 
-<body>
+<body class="filterblur">
     <div class="container fade-in" id="container">
         <div class="top">
             <input id="input" type="text" class="task-input">
 
-            <!-- <a href="#modal1" class="button btn-round" id="settings">
+            <a onclick="chartmode()" class="button" id="chart">
                 <span>
-                    <i class="fas fa-wrench"></i>
+                    <i class="far fa-window-restore"></i>
                 </span>
-            </a> -->
+            </a>
             <a onclick="darkmode()" class="button" id="dark">
                 <span>
                     <i class="far fa-lightbulb"></i>
@@ -28,7 +28,7 @@
             </a>
         </div>
 
-        <div class="kanban-board">
+        <div class="kanban-board" id="kanban-board">
             <div class="category todo" id="todo" ondrop="drop(event)" ondragover="allowDrop(event)">
                 <h2>Todo</h2>
                 <span>

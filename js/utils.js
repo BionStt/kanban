@@ -111,11 +111,37 @@ function getRandomArray(arr) {
 function setDark(dark) {
     if (dark) {
         document.getElementById("dark").className = "button button-dark";
-
+        document.getElementById("chart").className = "button button-dark";
         document.getElementById("container").className = "container dark";
     } else {
         document.getElementById("dark").className = "button";
-
+        document.getElementById("chart").className = "button";
         document.getElementById("container").className = "container";
     }
+}
+
+
+function toggleChart(chart) {
+    $("body").css("animation", "blur 2s ease");
+
+    if (chart) {
+        $("#kanban-board").css("flex-wrap", "wrap");
+        document.getElementById("kanban-board").setAttribute("chart", true);
+        $(".container .kanban-board .category").css("flex-basis", "100%");
+        $(".container.dark .kanban-board .category ul li").css("width", "300px");
+        $(".container.dark .kanban-board .category ul li").css("margin-left", "10px");
+        $(".container .kanban-board .category ul li").css("width", "300px");
+        $(".container .kanban-board .category ul li").css("margin-left", "10px");
+    } else {
+        $("#kanban-board").css("flex-wrap", "");
+        document.getElementById("kanban-board").setAttribute("chart", false);
+        $(".container .kanban-board .category").css("flex-basis", "");
+        $(".container.dark .kanban-board .category ul li").css("width", "100%");
+        $(".container.dark .kanban-board .category ul li").css("margin-left", "");
+        $(".container .kanban-board .category ul li").css("width", "");
+        $(".container .kanban-board .category ul li").css("margin-left", "");
+    }
+
+    $("body").removeClass("blur");
+
 }
