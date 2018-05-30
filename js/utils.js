@@ -8,12 +8,19 @@ function drag(ev) {
 }
 
 function drop(ev) {
-    ev.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    ev.target.children[2].appendChild(document.getElementById(data));
+    try {
+        ev.preventDefault();
+        let data = ev.dataTransfer.getData("text");
 
-    setCounter();
-    save();
+        if (ev.target.innerHTML.substring(0, 3) == "<li") {
+            return false;
+        }
+
+        ev.target.children[2].appendChild(document.getElementById(data));
+
+        setCounter();
+        save();
+    } catch (error) {}
 }
 
 /// get list and set counters
