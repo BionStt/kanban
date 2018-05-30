@@ -82,7 +82,6 @@ function getTicketsByCategory(categoryName, jqueryPath) {
     });
 
     return returnList;
-
 }
 
 function getRandomArray(arr) {
