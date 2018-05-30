@@ -227,15 +227,3 @@ svg:not(:root).svg-inline--fa {
         opacity: 1;
     }
 }
-
-@keyframes blur {
-    0% {
-        -webkit-filter: blur(0px)
-    }
-    50% {
-        -webkit-filter: blur(4px)
-    }
-    100% {
-        -webkit-filter: blur(0px)
-    }
-}

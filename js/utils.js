@@ -122,8 +122,6 @@ function setDark(dark) {
 
 
 function toggleChart(chart) {
-    $("body").css("animation", "blur 2s ease");
-
     if (chart) {
         $("#kanban-board").css("flex-wrap", "wrap");
         document.getElementById("kanban-board").setAttribute("chart", true);
@@ -141,7 +139,4 @@ function toggleChart(chart) {
         $(".container .kanban-board .category ul li").css("width", "");
         $(".container .kanban-board .category ul li").css("margin-left", "");
     }
-
-    $("body").removeClass("blur");
-
 }
