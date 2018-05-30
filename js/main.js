@@ -42,6 +42,7 @@ input.addEventListener("keyup", function (event) {
             window.location.reload();
         }
 
+
         add();
         save();
     }
@@ -64,7 +65,7 @@ function add() {
     input.value = "";
 
     arr.todo.push(obj);
-    write(arr.todo, todoList)
+    writeone(arr.todo, todoList, obj)
 }
 
 /// load
@@ -76,9 +77,9 @@ function load() {
         arr = JSON.parse(localStorage.getItem("data"));
 
         if (arr != null) {
-            write(arr.todo, todoList);
-            write(arr.doing, doingList);
-            write(arr.done, doneList);
+            write(arr.todo, todoList, true,false);
+            write(arr.doing, doingList, true,false);
+            write(arr.done, doneList, true,false);
         } else {
             arr = {
                 todo: [],
@@ -94,9 +95,9 @@ function load() {
                 'secret-key': secret
             },
             success: (data) => {
-                write(data.todo, todoList);
-                write(data.doing, doingList);
-                write(data.done, doneList);
+                write(data.todo, todoList, true,false);
+                write(data.doing, doingList, true,false);
+                write(data.done, doneList, true,false);
 
                 setCounter();
             },

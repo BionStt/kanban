@@ -44,12 +44,32 @@ function getCard(obj) {
 }
 
 /// write all cards
-function write(category, list) {
+function write(category, list, fadein, isfirst) {
     clear(list);
 
+    let counter = 0;
+    let saveli;
     category.forEach(e => {
-        list.appendChild(getCard(e));
+        let li = getCard(e);
+        li.focus();
+        li.className += "fade-in";
+        list.appendChild(li);
+
+
+        counter++;
     });
+
+
+    setCounter();
+}
+
+/// write todo card 
+function writeone(category, list, obj) {
+
+    let li = getCard(obj);
+    li.focus();
+    li.className += "fade-in";
+    list.appendChild(li);
 
     setCounter();
 }
@@ -93,11 +113,11 @@ function getRandomArray(arr) {
 function setDark(dark) {
     if (dark) {
         document.getElementById("dark").className = "button button-dark";
-        
+
         document.getElementById("container").className = "container dark";
     } else {
         document.getElementById("dark").className = "button";
-        
+
         document.getElementById("container").className = "container";
     }
 }
