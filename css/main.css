@@ -227,3 +227,7 @@ svg:not(:root).svg-inline--fa {
         opacity: 1;
     }
 }
+
+.container.dark .kanban-board .category ul li:nth-child(1), .container .kanban-board .category ul li:nth-child(1){
+    margin-left: px !important;
+}
