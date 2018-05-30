@@ -84,3 +84,18 @@ function getTicketsByCategory(categoryName, jqueryPath) {
     return returnList;
 
 }
+
+function getRandomArray(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function setDark(dark) {
+    if (dark) {
+        document.getElementById("container").className = "container dark";
+        document.getElementById("dark").className = "button btn-round button-dark";
+    } else {
+
+        document.getElementById("container").className = "container";
+        document.getElementById("dark").className = "button btn-round ";
+    }
+}

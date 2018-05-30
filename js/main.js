@@ -15,6 +15,9 @@ let input = document.getElementById("input");
 let secret = "";
 let bin = "";
 
+let phrases = ["Dispatching carrier pigeons", "ULTIMATE IS READY!", "Insert Coin to Continue", "spinning to win", "Entering cheat codes", "Rushing B", "Pressing random buttons", "Cheat Code Activated", "Resetting Run", "Removing pen from pineapple", "Caution: Contents Spicy", "Good News Everyone!", "Resurrecting dead memes", "Clicking circles (to the beat!)", "Building Lore", "We don't need a healer for this", "Wubba Lubba Dub Dub", "Scaling Bananas", "l o a d i n g a e s t h e t i c s", "Create the next Elon Musk company ", "Center the div in the page", "Buy a Tesla", "Develop a cheat code for life", "Switch sides", "Prepare final form", "Reset servers", "Learn PHP and then suicide", "Placeholders in 2018 LUL", "Get a girlfriend", "Get a boyfriend", "Just a punch by Saitama", "Spawn spiders in Minecraft"];
+
+
 /// press enter on input to add
 input.addEventListener("keyup", function (event) {
     event.preventDefault();
@@ -40,12 +43,8 @@ input.addEventListener("keyup", function (event) {
         }
 
         add();
-
-        // write();
         save();
     }
-
-
 });
 
 /// Add card to todo
@@ -71,6 +70,8 @@ function add() {
 
 /// load
 function load() {
+
+    $('#input').attr('placeholder', getRandomArray(phrases) + "...");
 
     if (!jsonbin) {
         arr = JSON.parse(localStorage.getItem("data"));
@@ -105,6 +106,10 @@ function load() {
             }
         });
     }
+
+    setInterval(() => {
+        $('#input').attr('placeholder', getRandomArray(phrases) + "...");
+    }, 2000);
 }
 
 function save() {
@@ -146,6 +151,15 @@ function save() {
 }
 
 function getLocalstorage() {
+
+    var dark = JSON.parse(localStorage.getItem("dark"));
+
+    if (dark == null) {
+        dark = false;
+    }
+
+    setDark(dark);
+
     var secretStored = JSON.parse(localStorage.getItem("secret"));
     var binStored = JSON.parse(localStorage.getItem("bin"));
 
@@ -159,16 +173,6 @@ function getLocalstorage() {
     secret = secretStored;
     bin = binStored;
 
-    var dark = JSON.parse(localStorage.getItem("dark"));
-
-    if (dark == null) {
-        dark = false;
-    }
-
-    if (dark) {
-        document.getElementById("container").className = "container dark";
-        document.getElementById("dark").className = "button btn-round button-dark";
-    }
 
     return true;
 
@@ -181,14 +185,7 @@ function darkmode() {
         dark = true
     }
 
-    if (dark) {
-        document.getElementById("container").className = "container dark";
-        document.getElementById("dark").className = "button btn-round button-dark";
-    } else {
-
-        document.getElementById("container").className = "container";
-        document.getElementById("dark").className = "button btn-round ";
-    }
+    setDark(dark);
 
     localStorage.setItem("dark", JSON.stringify(dark));
 }
@@ -201,6 +198,8 @@ function saveData(key, value) {
 }
 
 $(function () {
+
+
 
     getLocalstorage();
     load();
