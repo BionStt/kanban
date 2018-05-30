@@ -128,6 +128,8 @@ function toggleChart(chart) {
         $(".container .kanban-board .category").css("flex-basis", "100%");
         $(".container.dark .kanban-board .category ul li").css("width", "300px");
         $(".container.dark .kanban-board .category ul li").css("margin-left", "10px");
+        $(".container.dark .kanban-board .category ul").css("display", "flex");
+        $(".container.dark .kanban-board .category ul").css("flex-wrap", "wrap");
         $(".container .kanban-board .category ul li").css("width", "300px");
         $(".container .kanban-board .category ul li").css("margin-left", "10px");
     } else {
@@ -136,6 +138,8 @@ function toggleChart(chart) {
         $(".container .kanban-board .category").css("flex-basis", "");
         $(".container.dark .kanban-board .category ul li").css("width", "100%");
         $(".container.dark .kanban-board .category ul li").css("margin-left", "");
+        $(".container .kanban-board .category ul ").css("display", "");
+        $(".container .kanban-board .category ul ").css("flex-wrap", "");
         $(".container .kanban-board .category ul li").css("width", "");
         $(".container .kanban-board .category ul li").css("margin-left", "");
     }
