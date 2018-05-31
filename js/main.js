@@ -42,6 +42,7 @@ input.addEventListener("keyup", function (event) {
             window.location.reload();
         }
 
+        $("#input").blur();
         add();
         save();
     }

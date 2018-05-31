@@ -132,11 +132,15 @@ function toggleChart(chart) {
         document.getElementById("kanban-board").setAttribute("chart", true);
         $(".container .kanban-board .category ul").addClass('media');
         $(".container .kanban-board .category ul li").addClass('media');
+        $(".container.dark .kanban-board .category ul").addClass('media');
+        $(".container.dark .kanban-board .category ul li").addClass('media');
     } else {
         $("#kanban-board").removeClass('media');
         document.getElementById("kanban-board").setAttribute("chart", false);
         $(".container .kanban-board .category ul").removeClass('media');
         $(".container .kanban-board .category ul li").removeClass('media');
+        $(".container.dark .kanban-board .category ul").removeClass('media');
+        $(".container.dark .kanban-board .category ul li").removeClass('media');
     }
 }
 
