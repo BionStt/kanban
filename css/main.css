@@ -56,45 +56,50 @@ body {
 .container .kanban-board .category {
     flex: 1;
     margin: 10px;
-    padding: 10px;
-    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
-
 
 /* Scrollbar style */
 
-.container .kanban-board .category::-webkit-scrollbar-track {
+.container .kanban-board .category ul::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #F6F6F6;
 }
 
-.container .kanban-board .category::-webkit-scrollbar {
+.container .kanban-board .category ul::-webkit-scrollbar {
     width: 3px;
     background-color: #F6F6F6;
 }
 
-.container .kanban-board .category::-webkit-scrollbar-thumb {
+.container .kanban-board .category ul::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #35393c;
 }
 
-.container.dark .kanban-board .category::-webkit-scrollbar-track {
+.container.dark .kanban-board .category ul::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #35393c;
 }
 
-.container.dark .kanban-board .category::-webkit-scrollbar {
+.container.dark .kanban-board .category ul::-webkit-scrollbar {
     width: 3px;
     background-color: #35393c;
 }
 
-.container.dark .kanban-board .category::-webkit-scrollbar-thumb {
+.container.dark .kanban-board .category ul::-webkit-scrollbar-thumb {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #F6F6F6;
 }
-
 
 /* end scrollbar */
+
+.container .kanban-board .category h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    text-transform: uppercase;
+}
 
 .container.dark .kanban-board .category h2 {
     margin: 0;
@@ -110,8 +115,11 @@ body {
 
 .container .kanban-board .category ul {
     margin: 10px 0;
-    padding: 0;
+    padding: 10px;
     list-style: none;
+    max-height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .container .kanban-board .category ul li {
@@ -271,7 +279,6 @@ svg:not(:root).svg-inline--fa {
     margin-left: px !important;
 }
 
-
 /* @media (min-width: 600px) { */
 
 .container .kanban-board.media {
@@ -289,7 +296,6 @@ ul.media {
     width: 100%;
     margin-left: 0;
 }
-
 
 /* } */
 
