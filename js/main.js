@@ -24,14 +24,14 @@ input.addEventListener("keyup", function (event) {
 
     let value = document.getElementById("input").value;
     if (event.keyCode === 13) {
-        if (value.indexOf("add secret: ") != -1) {
-            secret = value.replace("add secret: ", "");
+        if (value.indexOf("set secret: ") != -1) {
+            secret = value.replace("set secret: ", "");
             saveData("secret", secret);
             return false;
         }
 
-        if (value.indexOf("add bin: ") != -1) {
-            bin = value.replace("add bin: ", "");
+        if (value.indexOf("set bin: ") != -1) {
+            bin = value.replace("set bin: ", "");
             saveData("bin", bin);
             return false;
         }
@@ -67,13 +67,7 @@ function add() {
     arr.todo.push(obj);
     writeone(arr.todo, todoList, obj)
 
-    var chart = JSON.parse(localStorage.getItem("chart"));
-
-    if (chart == null) {
-        chart = false;
-    }
-
-    toggleChart(chart);
+    setChart();
 }
 
 /// load
@@ -94,6 +88,11 @@ function load() {
                 done: []
             }
         }
+
+        setCounter();
+        setChart();
+        $("kanban-board").css("display", "flex");
+
     } else {
         $.ajax({
             url: 'https://api.jsonbin.io/b/' + bin + '/latest',
@@ -102,11 +101,14 @@ function load() {
                 'secret-key': secret
             },
             success: (data) => {
-                write(data.todo, todoList, true, false);
-                write(data.doing, doingList, true, false);
-                write(data.done, doneList, true, false);
+                try {
+                    write(data.todo, todoList, true, false);
+                    write(data.doing, doingList, true, false);
+                    write(data.done, doneList, true, false);
+                } catch (error) {}
 
                 setCounter();
+                setChart();
             },
             error: (err) => {
                 console.log(err.responseJSON);
@@ -151,6 +153,7 @@ function save() {
 
 }
 
+/// get data from localstorage
 function getLocalstorage() {
     var dark = JSON.parse(localStorage.getItem("dark"));
 
@@ -176,6 +179,7 @@ function getLocalstorage() {
     return true;
 }
 
+/// set dark mode
 function darkmode() {
     var dark = false
 
@@ -188,6 +192,7 @@ function darkmode() {
     localStorage.setItem("dark", JSON.stringify(dark));
 }
 
+/// set chart mode
 function chartmode() {
     var kanbanchart = document.getElementById("kanban-board").getAttribute("chart") == "true" ? true : false;
 
@@ -196,6 +201,7 @@ function chartmode() {
     localStorage.setItem("chart", JSON.stringify(!kanbanchart));
 }
 
+/// save data in localstorage
 function saveData(key, value) {
     var localstorage = JSON.parse(localStorage.getItem(key));
     localStorage.setItem(key, JSON.stringify(value));
@@ -207,14 +213,4 @@ getLocalstorage();
 
 $(function () {
     load();
-
-    setCounter();
-
-    var chart = JSON.parse(localStorage.getItem("chart"));
-
-    if (chart == null) {
-        chart = false;
-    }
-
-    toggleChart(chart);
 });

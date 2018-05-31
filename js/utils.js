@@ -119,10 +119,16 @@ function setDark(dark) {
         document.getElementById("dark").className = "button button-dark";
         document.getElementById("chart").className = "button button-dark";
         document.getElementById("container").className = "container dark";
+
+        $('head').append('<meta name="theme-color" content="#292c2f">');
+
     } else {
         document.getElementById("dark").className = "button";
         document.getElementById("chart").className = "button";
         document.getElementById("container").className = "container";
+
+        $('head').append('<meta name="theme-color" content="white">');
+
     }
 }
 
@@ -144,28 +150,13 @@ function toggleChart(chart) {
     }
 }
 
-// function toggleChart(chart) {
-//     if (chart) {
-//         $("#kanban-board").css("flex-wrap", "wrap");
-//         document.getElementById("kanban-board").setAttribute("chart", true);
-//         $(".container .kanban-board .category").css("flex-basis", "100%");
-//         $(".container.dark .kanban-board .category ul li").css("width", "30%");
-//         $(".container.dark .kanban-board .category ul li").css("margin-left", "10px");
-//         $(".container.dark .kanban-board .category ul").css("display", "flex");
-//         $(".container.dark .kanban-board .category ul").css("flex-wrap", "wrap");
-//         $(".container .kanban-board .category ul").css("display", "flex");
-//         $(".container .kanban-board .category ul").css("flex-wrap", "wrap");
-//         $(".container .kanban-board .category ul li").css("width", "30%");
-//         $(".container .kanban-board .category ul li").css("margin-left", "10px");
-//     } else {
-//         $("#kanban-board").css("flex-wrap", "");
-//         document.getElementById("kanban-board").setAttribute("chart", false);
-//         $(".container .kanban-board .category").css("flex-basis", "");
-//         $(".container.dark .kanban-board .category ul li").css("width", "100%");
-//         $(".container.dark .kanban-board .category ul li").css("margin-left", "");
-//         $(".container .kanban-board .category ul").css("display", "");
-//         $(".container .kanban-board .category ul").css("flex-wrap", "");
-//         $(".container .kanban-board .category ul li").css("width", "");
-//         $(".container .kanban-board .category ul li").css("margin-left", "");
-//     }
-// }
+/// set chart mode
+function setChart() {
+    var chart = JSON.parse(localStorage.getItem("chart"));
+
+    if (chart == null) {
+        chart = false;
+    }
+
+    toggleChart(chart);
+}
