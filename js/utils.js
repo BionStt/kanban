@@ -19,7 +19,20 @@ function drop(ev) {
 
         setCounter();
         save();
+
+        scrollDivToBottom(ev.currentTarget.id);
     } catch (error) {}
+}
+
+/// scroll function
+function scrollDivToBottom(id) {
+    let height = parseInt($('#' + id + ' ul').height());
+
+    height += '';
+
+    $('#' + id + ' ul').animate({
+        scrollTop: height + 1
+    });
 }
 
 /// get list and set counters
@@ -61,7 +74,6 @@ function write(category, list, fadein, isfirst) {
         li.className += "fade-in";
         list.appendChild(li);
 
-
         counter++;
     });
 
@@ -76,14 +88,29 @@ function writeone(category, list, obj) {
     list.appendChild(li);
 
     setCounter();
+
+    scrollDivToBottom("todo");
 }
 
 /// remove using the button from the ticket
 function remove(e) {
-    let parentElement = document.getElementById(e.srcElement.getAttribute("removeid"));
-    $("#" + parentElement.id).remove()
-    save();
-    setCounter();
+    let parentElement;
+
+    try {
+        /// Chrome and supported 
+        parentElement = document.getElementById(e.srcElement.getAttribute("removeid"));
+    } catch (error) {
+        /// Fix for firefox, there is no srcElement
+        parentElement = document.getElementById(e.currentTarget.getAttribute("removeid"));
+    }
+
+    $("#" + parentElement.id).addClass("fade-out");
+
+    setTimeout(() => {
+        $("#" + parentElement.id).remove();
+        save();
+        setCounter();
+    }, 500);
 }
 
 /// Get random id
@@ -120,6 +147,7 @@ function setDark(dark) {
         document.getElementById("chart").className = "button button-dark";
         document.getElementById("container").className = "container dark";
 
+        /// Stuff for the header in chrome/firefox/edge
         $('head').append('<meta name="theme-color" content="#292c2f">');
 
     } else {
@@ -127,8 +155,8 @@ function setDark(dark) {
         document.getElementById("chart").className = "button";
         document.getElementById("container").className = "container";
 
+        /// Stuff for the header in chrome/firefox/edge
         $('head').append('<meta name="theme-color" content="white">');
-
     }
 }
 
@@ -152,11 +180,5 @@ function toggleChart(chart) {
 
 /// set chart mode
 function setChart() {
-    var chart = JSON.parse(localStorage.getItem("chart"));
-
-    if (chart == null) {
-        chart = false;
-    }
-
-    toggleChart(chart);
+    toggleChart(JSON.parse(localStorage.getItem("chart")) || false);
 }

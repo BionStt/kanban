@@ -15,6 +15,8 @@ let input = document.getElementById("input");
 let secret = "";
 let bin = "";
 
+let inputInterval = null;
+
 let phrases = ["Dispatching carrier pigeons", "ULTIMATE IS READY!", "Insert Coin to Continue", "spinning to win", "Entering cheat codes", "Rushing B", "Pressing random buttons", "Cheat Code Activated", "Resetting Run", "Removing pen from pineapple", "Caution: Contents Spicy", "Good News Everyone!", "Resurrecting dead memes", "Clicking circles (to the beat!)", "Building Lore", "We don't need a healer for this", "Wubba Lubba Dub Dub", "Scaling Bananas", "l o a d i n g a e s t h e t i c s", "Create the next Elon Musk company ", "Center the div in the page", "Buy a Tesla", "Develop a cheat code for life", "Switch sides", "Prepare final form", "Reset servers", "Learn PHP and then suicide", "Placeholders in 2018 LUL", "Get a girlfriend", "Get a boyfriend", "Just a punch by Saitama", "Spawn spiders in Minecraft"];
 
 
@@ -92,7 +94,6 @@ function load() {
         setCounter();
         setChart();
         $("kanban-board").css("display", "flex");
-
     } else {
         $.ajax({
             url: 'https://api.jsonbin.io/b/' + bin + '/latest',
@@ -116,7 +117,7 @@ function load() {
         });
     }
 
-    setInterval(() => {
+    inputInterval = setInterval(() => {
         $('#input').attr('placeholder', getRandomArray(phrases) + "...");
     }, 2000);
 }
@@ -148,18 +149,12 @@ function save() {
                 console.log(err.responseJSON);
             }
         });
-
     }
-
 }
 
 /// get data from localstorage
 function getLocalstorage() {
-    var dark = JSON.parse(localStorage.getItem("dark"));
-
-    if (dark == null) {
-        dark = false;
-    }
+    var dark = JSON.parse(localStorage.getItem("dark")) || false;
 
     setDark(dark);
 
@@ -175,17 +170,12 @@ function getLocalstorage() {
     secret = secretStored;
     bin = binStored;
 
-
     return true;
 }
 
 /// set dark mode
 function darkmode() {
-    var dark = false
-
-    if (document.getElementById("container").className == "container") {
-        dark = true
-    }
+    let dark = document.getElementById("container").className == "container" ? true : false;
 
     setDark(dark);
 
@@ -209,8 +199,10 @@ function saveData(key, value) {
     window.location.reload(false);
 }
 
+/// Get localstorage before jquery
 getLocalstorage();
 
 $(function () {
+    /// localstorage is loaded, load stuff now
     load();
 });
