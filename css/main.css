@@ -33,7 +33,7 @@ body {
 
 .container {
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
     display: flex;
     flex-direction: column;
     background: #F6F6F6;
@@ -57,9 +57,46 @@ body {
     flex: 1;
     margin: 10px;
     padding: 10px;
+    overflow: auto;
 }
 
-.container .kanban-board .category h2 {
+
+/* Scrollbar style */
+
+.container .kanban-board .category::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F6F6F6;
+}
+
+.container .kanban-board .category::-webkit-scrollbar {
+    width: 3px;
+    background-color: #F6F6F6;
+}
+
+.container .kanban-board .category::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #35393c;
+}
+
+.container.dark .kanban-board .category::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #35393c;
+}
+
+.container.dark .kanban-board .category::-webkit-scrollbar {
+    width: 3px;
+    background-color: #35393c;
+}
+
+.container.dark .kanban-board .category::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #F6F6F6;
+}
+
+
+/* end scrollbar */
+
+.container.dark .kanban-board .category h2 {
     margin: 0;
     padding: 0;
     font-size: 16px;
@@ -140,6 +177,7 @@ body {
 .container.dark .kanban-board .category ul li {
     background: #35393c;
     color: #e8e8e8;
+    overflow: hidden;
 }
 
 #dark {
@@ -233,20 +271,72 @@ svg:not(:root).svg-inline--fa {
     margin-left: px !important;
 }
 
-@media (max-width: 768px) {
-    .container #kanban-board {
+
+/* @media (min-width: 600px) { */
+
+.container .kanban-board.media {
+    flex-direction: column;
+}
+
+ul.media {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#todoUl li.media,
+#doingUl li.media,
+#doneUl li.media {
+    width: 100%;
+    margin-left: 0;
+}
+
+
+/* } */
+
+@media (min-width: 768px) {
+    .container .kanban-board.media {
         flex-direction: column;
     }
-    #todoUl,
-    #doingUl,
-    #doneUl {
+    ul.media {
         display: flex;
         flex-wrap: wrap;
     }
-    #todoUl li,
-    #doingUl li,
-    #doneUl li {
-        flex-basis: 100%;
-        margin-left: 0 !important;
+    #todoUl li.media,
+    #doingUl li.media,
+    #doneUl li.media {
+        width: calc(50% - 10px);
+        margin-left: 10px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container .kanban-board.media {
+        flex-direction: column;
+    }
+    ul.media {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #todoUl li.media,
+    #doingUl li.media,
+    #doneUl li.media {
+        width: calc(50% - 10px);
+        margin-left: 10px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container .kanban-board.media {
+        flex-direction: column;
+    }
+    ul.media {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    #todoUl li.media,
+    #doingUl li.media,
+    #doneUl li.media {
+        width: calc(33% - 10px);
+        margin-left: 10px;
     }
 }

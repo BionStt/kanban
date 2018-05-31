@@ -12,11 +12,10 @@ function drop(ev) {
         ev.preventDefault();
         let data = ev.dataTransfer.getData("text");
 
-        if (ev.target.innerHTML.substring(0, 3) == "<li") {
-            return false;
-        }
-
-        ev.target.children[2].appendChild(document.getElementById(data));
+        if (ev.target.innerHTML.substring(0, 3) == "<li")
+            ev.target.appendChild(document.getElementById(data));
+        else
+            ev.target.children[2].appendChild(document.getElementById(data));
 
         setCounter();
         save();
@@ -127,29 +126,42 @@ function setDark(dark) {
     }
 }
 
-
 function toggleChart(chart) {
     if (chart) {
-        $("#kanban-board").css("flex-wrap", "wrap");
+        $("#kanban-board").addClass('media');
         document.getElementById("kanban-board").setAttribute("chart", true);
-        $(".container .kanban-board .category").css("flex-basis", "100%");
-        $(".container.dark .kanban-board .category ul li").css("width", "30%");
-        $(".container.dark .kanban-board .category ul li").css("margin-left", "10px");
-        $(".container.dark .kanban-board .category ul").css("display", "flex");
-        $(".container.dark .kanban-board .category ul").css("flex-wrap", "wrap");
-        $(".container .kanban-board .category ul").css("display", "flex");
-        $(".container .kanban-board .category ul").css("flex-wrap", "wrap");
-        $(".container .kanban-board .category ul li").css("width", "30%");
-        $(".container .kanban-board .category ul li").css("margin-left", "10px");
+        $(".container .kanban-board .category ul").addClass('media');
+        $(".container .kanban-board .category ul li").addClass('media');
     } else {
-        $("#kanban-board").css("flex-wrap", "");
+        $("#kanban-board").removeClass('media');
         document.getElementById("kanban-board").setAttribute("chart", false);
-        $(".container .kanban-board .category").css("flex-basis", "");
-        $(".container.dark .kanban-board .category ul li").css("width", "100%");
-        $(".container.dark .kanban-board .category ul li").css("margin-left", "");
-        $(".container .kanban-board .category ul").css("display", "");
-        $(".container .kanban-board .category ul").css("flex-wrap", "");
-        $(".container .kanban-board .category ul li").css("width", "");
-        $(".container .kanban-board .category ul li").css("margin-left", "");
+        $(".container .kanban-board .category ul").removeClass('media');
+        $(".container .kanban-board .category ul li").removeClass('media');
     }
 }
+
+// function toggleChart(chart) {
+//     if (chart) {
+//         $("#kanban-board").css("flex-wrap", "wrap");
+//         document.getElementById("kanban-board").setAttribute("chart", true);
+//         $(".container .kanban-board .category").css("flex-basis", "100%");
+//         $(".container.dark .kanban-board .category ul li").css("width", "30%");
+//         $(".container.dark .kanban-board .category ul li").css("margin-left", "10px");
+//         $(".container.dark .kanban-board .category ul").css("display", "flex");
+//         $(".container.dark .kanban-board .category ul").css("flex-wrap", "wrap");
+//         $(".container .kanban-board .category ul").css("display", "flex");
+//         $(".container .kanban-board .category ul").css("flex-wrap", "wrap");
+//         $(".container .kanban-board .category ul li").css("width", "30%");
+//         $(".container .kanban-board .category ul li").css("margin-left", "10px");
+//     } else {
+//         $("#kanban-board").css("flex-wrap", "");
+//         document.getElementById("kanban-board").setAttribute("chart", false);
+//         $(".container .kanban-board .category").css("flex-basis", "");
+//         $(".container.dark .kanban-board .category ul li").css("width", "100%");
+//         $(".container.dark .kanban-board .category ul li").css("margin-left", "");
+//         $(".container .kanban-board .category ul").css("display", "");
+//         $(".container .kanban-board .category ul").css("flex-wrap", "");
+//         $(".container .kanban-board .category ul li").css("width", "");
+//         $(".container .kanban-board .category ul li").css("margin-left", "");
+//     }
+// }
