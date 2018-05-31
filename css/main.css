@@ -60,7 +60,6 @@ body {
     overflow-x: hidden;
 }
 
-
 /* Scrollbar style */
 
 .container .kanban-board .category ul::-webkit-scrollbar-track {
@@ -92,7 +91,6 @@ body {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
     background-color: #F6F6F6;
 }
-
 
 /* end scrollbar */
 
@@ -281,7 +279,6 @@ svg:not(:root).svg-inline--fa {
     margin-left: px !important;
 }
 
-
 /* @media (min-width: 600px) { */
 
 .container .kanban-board.media {
@@ -307,6 +304,9 @@ ul.media {
     .container .kanban-board .category ul.media {
         max-height: 80%;
     }
+    .container.dark .kanban-board .category ul.media {
+        max-height: 80%;
+    }
     ul.media {
         display: flex;
         flex-wrap: wrap;
@@ -316,6 +316,18 @@ ul.media {
     #doneUl li.media {
         width: calc(50% - 10px);
         margin-left: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container .kanban-board.media {
+        flex-direction: column;
+    }
+    .container .kanban-board .category ul.media {
+        max-height: 80%;
+    }
+    .container.dark .kanban-board .category ul.media {
+        max-height: 80%;
     }
 }
 
