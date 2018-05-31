@@ -1,6 +1,12 @@
 /// Drag and drop
 function allowDrop(ev) {
     ev.preventDefault();
+
+    /* events fired on the drop targets */
+    document.addEventListener("dragover", function (event) {
+        // prevent default to allow drop
+        event.preventDefault();
+    }, false);
 }
 
 function drag(ev) {
@@ -8,6 +14,13 @@ function drag(ev) {
 }
 
 function drop(ev) {
+
+    /* events fired on the drop targets */
+    document.addEventListener("dragover", function (event) {
+        // prevent default to allow drop
+        event.preventDefault();
+    }, false);
+
     try {
         ev.preventDefault();
         let data = ev.dataTransfer.getData("text");

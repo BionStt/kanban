@@ -205,4 +205,11 @@ getLocalstorage();
 $(function () {
     /// localstorage is loaded, load stuff now
     load();
+
+    /// Trying to fix the drag an drop in safari
+    document.getElementsByTagName('body')[0].addEventListener('dragover', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        // alert("DragOver");
+    }, false);
 });
