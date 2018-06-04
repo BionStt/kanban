@@ -27,6 +27,7 @@ input.addEventListener("keyup", function (event) {
 
     let value = document.getElementById("input").value;
     if (event.keyCode === 13) {
+        $("#input").blur();
         if (value.indexOf("set secret: ") != -1) {
             secret = value.replace("set secret: ", "");
             saveData("secret", secret);
@@ -42,10 +43,24 @@ input.addEventListener("keyup", function (event) {
         if (value.indexOf("delete settings") != -1) {
             localStorage.removeItem("secret");
             localStorage.removeItem("bin");
-            window.location.reload();
+
+            /// Clear value
+            $('#input').val("");
+
+            /// Stop interval
+            clearInterval(inputInterval);
+
+            /// Some info
+            changeInput("Successfully cleared internal storage, refresing in 3 seconds!", "rgba(0,255,0,0.5)");
+
+            /// Refresh
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 3000);
+
+            return false;
         }
 
-        $("#input").blur();
         add();
         save();
     }
@@ -75,7 +90,7 @@ function add() {
 
 /// load
 function load() {
-    $('#input').attr('placeholder', getRandomArray(phrases) + "...");
+    changeInput("Loading kanban...", null);
 
     if (!jsonbin) {
         arr = JSON.parse(localStorage.getItem("data"));
@@ -84,12 +99,15 @@ function load() {
             write(arr.todo, todoList, true, false);
             write(arr.doing, doingList, true, false);
             write(arr.done, doneList, true, false);
+            changeInput("Successfully loaded from internal storage!", "rgba(0,255,0,0.5)");
+
         } else {
             arr = {
                 todo: [],
                 doing: [],
                 done: []
             }
+            changeInput("No data found on internal storage!", "rgba(255,255,0,0.5)");
         }
 
         setCounter();
@@ -105,7 +123,7 @@ function load() {
     }
 
     inputInterval = setInterval(() => {
-        $('#input').attr('placeholder', getRandomArray(phrases) + "...");
+        changeInput(null, null);
     }, 2000);
 }
 
@@ -117,17 +135,24 @@ function loadJSONbin() {
             'secret-key': secret
         },
         success: (data) => {
+            if (data == null || data == []) {
+                changeInput("No data found on JSONbin!", "rgba(255,255,0,0.5)");
+                return false;
+            }
+
             try {
                 write(data.todo, todoList, true, false);
                 write(data.doing, doingList, true, false);
                 write(data.done, doneList, true, false);
+                changeInput("Successfully loaded JSONbin!", "rgba(0,255,0,0.5)");
+
             } catch (error) {}
 
             setCounter();
             setChart();
         },
         error: (err) => {
-            console.log(err.responseJSON);
+            changeInput("Error loading JSONbin!", "rgba(255,0,0,0.5)");
         }
     });
 }
@@ -143,6 +168,7 @@ function save() {
 
     if (!jsonbin) {
         localStorage.setItem("data", JSON.stringify(arr));
+        changeInput("Successfully saved to internal storage!", "rgba(0,255,0,0.5)");
     } else {
         $.ajax({
             url: 'https://api.jsonbin.io/b/' + bin,
@@ -153,10 +179,12 @@ function save() {
             contentType: 'application/json',
             data: JSON.stringify(arr),
             success: (data) => {
+                changeInput("Successfully saved to JSONbin!", "rgba(0,255,0,0.5)");
                 // console.log(data);
             },
             error: (err) => {
-                console.log(err.responseJSON);
+                changeInput("Error saving to JSONbin!", "rgba(255,0,0,0.5)");
+                // console.log(err.responseJSON);
             }
         });
     }
@@ -206,7 +234,19 @@ function saveData(key, value) {
     var localstorage = JSON.parse(localStorage.getItem(key));
     localStorage.setItem(key, JSON.stringify(value));
 
-    window.location.reload(false);
+    /// Clear value
+    $('#input').val("");
+
+    /// Stop interval
+    clearInterval(inputInterval);
+
+    /// Some info
+    changeInput("Successfully saved " + key + " on the internal storage, refresing in 3 seconds!", "rgba(0,255,0,0.5)");
+
+    /// Refresh
+    setTimeout(() => {
+        window.location.reload(false);
+    }, 3000);
 }
 
 /// Get localstorage before jquery

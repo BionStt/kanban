@@ -211,3 +211,8 @@ function loadPace(dark) {
         $(".pace .pace-progress").css("background", "#000000")
     }
 }
+
+function changeInput(text, color) {
+    text == null ? $('#input').attr('placeholder', getRandomArray(phrases) + "...") : $('#input').attr('placeholder', text);
+    color == null ? $('#input').css('border', "none") : $('#input').css('border', "1px solid " + color);
+}

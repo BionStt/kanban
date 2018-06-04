@@ -155,7 +155,7 @@ body {
 
 .container .kanban-board .category ul li .btn-delete:hover {
     opacity: 1;
-}
+    }
 
 .container .kanban-board .category.ongoing li {
     border-left: 5px solid #f39c12;
