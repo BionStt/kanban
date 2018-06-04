@@ -19,6 +19,7 @@ let inputInterval = null;
 
 let phrases = ["Dispatching carrier pigeons", "ULTIMATE IS READY!", "Insert Coin to Continue", "spinning to win", "Entering cheat codes", "Rushing B", "Pressing random buttons", "Cheat Code Activated", "Resetting Run", "Removing pen from pineapple", "Caution: Contents Spicy", "Good News Everyone!", "Resurrecting dead memes", "Clicking circles (to the beat!)", "Building Lore", "We don't need a healer for this", "Wubba Lubba Dub Dub", "Scaling Bananas", "l o a d i n g a e s t h e t i c s", "Create the next Elon Musk company ", "Center the div in the page", "Buy a Tesla", "Develop a cheat code for life", "Switch sides", "Prepare final form", "Reset servers", "Learn PHP and then suicide", "Placeholders in 2018 LUL", "Get a girlfriend", "Get a boyfriend", "Just a punch by Saitama", "Spawn spiders in Minecraft"];
 
+var dark = null;
 
 /// press enter on input to add
 input.addEventListener("keyup", function (event) {
@@ -98,6 +99,7 @@ function load() {
         loadJSONbin();
 
         setInterval(() => {
+            loadPace(dark);
             loadJSONbin();
         }, 60000);
     }
@@ -162,7 +164,7 @@ function save() {
 
 /// get data from localstorage
 function getLocalstorage() {
-    var dark = JSON.parse(localStorage.getItem("dark")) || false;
+    dark = JSON.parse(localStorage.getItem("dark")) || false;
 
     setDark(dark);
 

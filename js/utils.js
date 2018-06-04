@@ -160,6 +160,9 @@ function setDark(dark) {
         document.getElementById("chart").className = "button button-dark";
         document.getElementById("container").className = "container dark";
 
+        /// progress bar
+        $(".pace .pace-progress").css("background", "#FFFFFF")
+
         /// Stuff for the header in chrome/firefox/edge
         $('head').append('<meta name="theme-color" content="#292c2f">');
 
@@ -167,6 +170,9 @@ function setDark(dark) {
         document.getElementById("dark").className = "button";
         document.getElementById("chart").className = "button";
         document.getElementById("container").className = "container";
+
+        /// progress bar
+        $(".pace .pace-progress").css("background", "#000000")
 
         /// Stuff for the header in chrome/firefox/edge
         $('head').append('<meta name="theme-color" content="white">');
@@ -194,4 +200,14 @@ function toggleChart(chart) {
 /// set chart mode
 function setChart() {
     toggleChart(JSON.parse(localStorage.getItem("chart")) || false);
+}
+
+function loadPace(dark) {
+    Pace.restart();
+
+    if (dark) {
+        $(".pace .pace-progress").css("background", "#FFFFFF")
+    } else {
+        $(".pace .pace-progress").css("background", "#000000")
+    }
 }
