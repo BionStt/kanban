@@ -95,31 +95,39 @@ function load() {
         setChart();
         $("kanban-board").css("display", "flex");
     } else {
-        $.ajax({
-            url: 'https://api.jsonbin.io/b/' + bin + '/latest',
-            type: 'GET',
-            headers: {
-                'secret-key': secret
-            },
-            success: (data) => {
-                try {
-                    write(data.todo, todoList, true, false);
-                    write(data.doing, doingList, true, false);
-                    write(data.done, doneList, true, false);
-                } catch (error) {}
+        loadJSONbin();
 
-                setCounter();
-                setChart();
-            },
-            error: (err) => {
-                console.log(err.responseJSON);
-            }
-        });
+        setInterval(() => {
+            loadJSONbin();
+        }, 60000);
     }
 
     inputInterval = setInterval(() => {
         $('#input').attr('placeholder', getRandomArray(phrases) + "...");
     }, 2000);
+}
+
+function loadJSONbin() {
+    $.ajax({
+        url: 'https://api.jsonbin.io/b/' + bin + '/latest',
+        type: 'GET',
+        headers: {
+            'secret-key': secret
+        },
+        success: (data) => {
+            try {
+                write(data.todo, todoList, true, false);
+                write(data.doing, doingList, true, false);
+                write(data.done, doneList, true, false);
+            } catch (error) {}
+
+            setCounter();
+            setChart();
+        },
+        error: (err) => {
+            console.log(err.responseJSON);
+        }
+    });
 }
 
 function save() {
