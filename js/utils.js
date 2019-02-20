@@ -10,7 +10,13 @@ function allowDrop(ev) {
 }
 
 function drag(ev) {
+    ev.stopPropagation();
     ev.dataTransfer.setData("text", ev.target.id);
+    let pic = new Image();
+    pic.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"; //transparent gif, resolves issue with Safari that otherwise does not allow dragging
+    pic.style.visibility = 'hidden';
+    ev.dataTransfer.setDragImage(pic, 0, 0);
+    ev.dataTransfer.effectAllowed = 'default';
 }
 
 function drop(ev) {
